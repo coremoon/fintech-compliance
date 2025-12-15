@@ -1,0 +1,21 @@
+{
+  "case_id": "kraken-cftc-2023",
+  "defendant": "Kraken",
+  "authority": "CFTC (Commodity Futures Trading Commission)",
+  "date": "2023-09-06",
+  "fine": "$30,000,000",
+  "jurisdiction": "United States",
+  "violation": "Unregistered staking services",
+  "regulation": "Commodity Exchange Act",
+  "summary": "\nKraken, a major cryptocurrency exchange, agreed to pay $30 million in penalties \nand cease offering staking services to US customers without proper registration \nas a futures commission merchant. The CFTC found that Kraken's staking-as-a-service \nproduct was an unregistered commodity futures trading operation.\n                ",
+  "key_findings": [
+    "Offered staking services without required registration",
+    "Made material misrepresentations about regulatory status",
+    "Failed to implement required compliance systems",
+    "Violated the Commodity Exchange Act"
+  ],
+  "impact": "Major compliance wake-up call for crypto staking services",
+  "lesson": "Crypto services must register appropriately; cannot claim exemptions without basis",
+  "source": "CFTC Press Release September 6, 2023",
+  "url": "https://www.cftc.gov/news/press-releases"
+}

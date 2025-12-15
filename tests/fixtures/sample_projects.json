@@ -1,0 +1,26 @@
+{
+  "bitcoin_staking_pool": {
+    "name": "Bitcoin Staking Pool with Simplicity Contracts",
+    "description": "Users deposit BTC, earn staking rewards via Simplicity smart contracts on Taproot, distribution via Lightning Network",
+    "tech_stack": {
+      "contracts": "Simplicity on Taproot",
+      "distribution": "Lightning Network",
+      "custody": "HSM with Threshold Signatures",
+      "kyc_storage": "Encrypted PostgreSQL"
+    },
+    "business": {
+      "target_market": "EU users",
+      "expected_aum": "€5-10M Year 1",
+      "fee_model": "2% of rewards"
+    }
+  },
+  "defi_lending": {
+    "name": "DeFi Lending Protocol",
+    "description": "Algorithmic lending/borrowing protocol with automated interest rates",
+    "tech_stack": {
+      "contracts": "Solidity or Simplicity",
+      "blockchain": "Ethereum or Bitcoin",
+      "frontend": "Web3 dApp"
+    }
+  }
+}

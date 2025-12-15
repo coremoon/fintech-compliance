@@ -1,0 +1,132 @@
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "fintech-compliance"
+version = "0.1.0"
+description = "AI-powered compliance advisory system for blockchain and crypto FinTechs"
+authors = ["K"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+anthropic = ">=0.25.0"
+langchain = "==0.1.0"
+langchain-anthropic = "==0.1.0"
+pandas = ">=2.0.0"
+numpy = ">=1.24.0"
+requests = ">=2.31.0"
+beautifulsoup4 = ">=4.12.0"
+lxml = ">=4.9.0"
+mlflow = ">=2.10.0"
+ray = ">=2.9.0"
+fastapi = ">=0.104.0"
+uvicorn = ">=0.24.0"
+pydantic = ">=2.5.0"
+sqlalchemy = ">=2.0.0"
+psycopg2-binary = ">=2.9.0"
+prometheus-client = ">=0.19.0"
+python-json-logger = ">=2.0.0"
+python-dotenv = ">=1.0.0"
+pyyaml = ">=6.0.0"
+typer = ">=0.9.0"
+weaviate-client = ">=3.18.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = ">=7.4.0"
+pytest-cov = ">=4.1.0"
+black = ">=23.12.0"
+flake8 = ">=6.1.0"
+mypy = ">=1.7.0"
+poethepoet = "^0.38.0"
+
+[tool.black]
+line-length = 100
+target-version = ['py310', 'py311']
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+
+# ============================================================================
+# POETHEPOET CONFIGURATION - Task Runner
+# ============================================================================
+[tool.poe.tasks]
+
+# ────────────────────────────────────────────────────────────────────────────
+# API TASKS
+# ────────────────────────────────────────────────────────────────────────────
+
+api = "uvicorn src.api.main:app --reload --host 0.0.0.0 --port 8088"
+api-debug = "python -m uvicorn src.api.main:app --reload --log-level debug"
+
+# ────────────────────────────────────────────────────────────────────────────
+# TESTING TASKS
+# ────────────────────────────────────────────────────────────────────────────
+
+test = "pytest tests/"
+test-verbose = "pytest tests/ -v --tb=short"
+test-watch = "pytest tests/ -v --tb=short -x"
+test-coverage = "pytest tests/ --cov=src --cov-report=html --cov-report=term"
+
+# ────────────────────────────────────────────────────────────────────────────
+# CODE QUALITY TASKS
+# ────────────────────────────────────────────────────────────────────────────
+
+format = "black ."
+check = "black . --check && flake8 . && isort . --check-only"
+lint = "black . && flake8 . && isort ."
+lint-fix = "black . && isort . && flake8 ."
+type-check = "mypy src/"
+
+# ────────────────────────────────────────────────────────────────────────────
+# COMBINED QUALITY TASKS
+# ────────────────────────────────────────────────────────────────────────────
+
+check-all = "pytest tests/ && black . --check && flake8 . && mypy src/"
+check-all-fix = "black . && isort . && pytest tests/"
+
+# ────────────────────────────────────────────────────────────────────────────
+# CLEANUP & MAINTENANCE
+# ────────────────────────────────────────────────────────────────────────────
+
+clean = """
+rm -rf .pytest_cache
+rm -rf __pycache__
+rm -rf .mypy_cache
+rm -rf .coverage
+rm -rf htmlcov
+rm -rf dist
+rm -rf build
+find . -type d -name '__pycache__' -exec rm -rf {} +
+find . -type f -name '*.pyc' -delete
+echo "✅ Cleanup complete"
+"""
+
+# ────────────────────────────────────────────────────────────────────────────
+# FILE INTEGRITY
+# ────────────────────────────────────────────────────────────────────────────
+
+checksums = "sh -c 'find . -type f \\( -name \"*.py\" -o -name \"*.json\" -o -name \"*.md\" \\) ! -path \"./.venv/*\" ! -path \"./.git/*\" -exec sha1sum {} \\; | sort > CHECKSUMS.sha1 && echo \"✅ Checksums written to CHECKSUMS.sha1\"'"
+
+# ────────────────────────────────────────────────────────────────────────────
+# DOCUMENTATION TASKS
+# ────────────────────────────────────────────────────────────────────────────
+
+docs = "sphinx-build -b html docs/ docs/_build/"
+docs-clean = "rm -rf docs/_build"
+
+# ────────────────────────────────────────────────────────────────────────────
+# UTILITY TASKS
+# ────────────────────────────────────────────────────────────────────────────
+
+update-deps = "poetry update --dry-run"
+install-pre-commit = "pre-commit install"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --cov=src --cov-report=html"

@@ -1,0 +1,21 @@
+{
+  "case_id": "revolut-fca-2023",
+  "defendant": "Revolut Ltd",
+  "authority": "FCA (Financial Conduct Authority)",
+  "date": "2023-09-26",
+  "fine": "£8,000,000",
+  "jurisdiction": "United Kingdom",
+  "violation": "GDPR violations and data protection breaches",
+  "regulation": "General Data Protection Regulation (GDPR)",
+  "summary": "\nRevolut, a fintech company, was fined £8 million by the FCA for GDPR violations \ninvolving a 2017 data breach that affected 31,000 customers. The company failed \nto protect personal data and did not properly report the breach. The case highlighted \nfintech's obligations under GDPR even during security incidents.\n                ",
+  "key_findings": [
+    "Failed to protect customer personal data",
+    "Did not implement proper data security measures",
+    "Inadequate breach response procedures",
+    "Failed to notify supervisory authorities promptly"
+  ],
+  "impact": "All fintech must implement proper GDPR compliance",
+  "lesson": "Data breaches must be reported; GDPR applies to all financial services",
+  "source": "FCA Enforcement Notice September 2023",
+  "url": "https://www.fca.org.uk/news"
+}

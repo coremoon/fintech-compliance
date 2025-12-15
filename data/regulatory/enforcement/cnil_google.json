@@ -1,0 +1,21 @@
+{
+  "case_id": "google-cnil-2022",
+  "defendant": "Google Inc",
+  "authority": "CNIL (French Data Protection Authority)",
+  "date": "2022-12-01",
+  "fine": "€90,000,000",
+  "jurisdiction": "France",
+  "violation": "GDPR - Illegal use of cookies",
+  "regulation": "General Data Protection Regulation (GDPR), ePrivacy Directive",
+  "summary": "\nThe French CNIL fined Google €90 million for illegally setting tracking cookies \non users' browsers without proper consent. The company had a dark pattern making \nit easier to reject cookies than to accept them. This became a landmark GDPR \nenforcement action showing how tech giants must respect user privacy rights.\n                ",
+  "key_findings": [
+    "Set tracking cookies without valid consent",
+    "Implemented dark patterns to manipulate user choices",
+    "Failed to provide genuine opt-in mechanisms",
+    "Systematic GDPR violations across EU users"
+  ],
+  "impact": "Tech companies must implement genuine consent mechanisms",
+  "lesson": "GDPR enforcement applies to all companies processing EU user data",
+  "source": "CNIL Decision December 1, 2022",
+  "url": "https://www.cnil.fr/en/home"
+}

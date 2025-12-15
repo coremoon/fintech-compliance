@@ -1,0 +1,21 @@
+{
+  "case_id": "celsius-sec-2023",
+  "defendant": "Celsius Network",
+  "authority": "SEC (Securities and Exchange Commission)",
+  "date": "2023-12-06",
+  "fine": "$4,700,000",
+  "jurisdiction": "United States",
+  "violation": "Unregistered securities offerings",
+  "regulation": "Securities Act of 1933, Securities Exchange Act of 1934",
+  "summary": "\nCelsius Network, a crypto lending platform, was charged by the SEC for offering \nunregistered securities through its Celsius Earn product. The company agreed to \npay $4.7 million in penalties and return customer funds without complying with \nsecurities laws. The platform had promised high yields without disclosing risks.\n                ",
+  "key_findings": [
+    "Offered unregistered securities (Celsius Earn product)",
+    "Made misleading statements about risk and insolvency",
+    "Failed to register as investment advisor or broker",
+    "Did not implement required compliance controls"
+  ],
+  "impact": "Crypto yield products must register or cease operations",
+  "lesson": "High-yield crypto products are securities; cannot escape regulation through crypto framing",
+  "source": "SEC Press Release December 6, 2023",
+  "url": "https://www.sec.gov/news/press-release"
+}

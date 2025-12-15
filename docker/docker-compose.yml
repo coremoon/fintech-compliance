@@ -1,0 +1,48 @@
+version: '3.4'
+
+services:
+  weaviate:
+    # RAFT issues with v1.32.0+
+    # downgrade to 1.28.0 (stable, supports weaviate-client v4)
+    image: cr.weaviate.io/semitechnologies/weaviate:1.28.0
+
+    # ====================================================================
+    # PORT MAPPING CONFIGURATION
+    # ====================================================================
+    # Weaviate uses two protocols:
+    # - HTTP REST API (internal 8080 → external 8098)
+    # - gRPC API (internal 50051 → external 50051)
+    # ====================================================================
+    ports:
+      # HTTP REST API: Weaviate Vector Database
+      # Access: http://localhost:8098
+      # Used by: weaviate_client, Agent Tools, API Routes
+      - "8098:8080"
+      
+      # gRPC API: Weaviate Protocol Buffer Service
+      # Access: localhost:50051
+      # Used by: High-performance client connections
+      - "50051:50051"
+    
+    environment:
+      QUERY_DEFAULTS_LIMIT: 25
+      PERSISTENCE_DATA_PATH: '/var/lib/weaviate'
+      
+      # Authentication (API Key)
+      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: 'false'
+      AUTHENTICATION_APIKEY_ENABLED: 'true'
+      AUTHENTICATION_APIKEY_ALLOWED_KEYS: 'W3aviate'
+      AUTHENTICATION_APIKEY_USERS: 'admin'
+      
+      # Authorization/RBAC disabled for development
+      # Enable in production with proper configuration
+      AUTHORIZATION_ENABLE_RBAC: 'false'
+    
+    volumes:
+      - weaviate_data:/var/lib/weaviate
+    
+    restart: on-failure:0
+
+volumes:
+  weaviate_data:
+    driver: local

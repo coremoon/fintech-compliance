@@ -1,0 +1,21 @@
+{
+  "case_id": "wirecard-bafin-2020",
+  "defendant": "Wirecard AG",
+  "authority": "BaFin (German Federal Financial Supervisory Authority)",
+  "date": "2020-06-25",
+  "fine": "€900,000",
+  "jurisdiction": "Germany",
+  "violation": "Accounting fraud, AML violations",
+  "regulation": "German Banking Act (KWG), Money Laundering Act",
+  "summary": "\nWirecard, a German fintech payment processor, collapsed in 2020 after a massive \naccounting fraud scandal. BaFin and German prosecutors found that the company had \ninflated revenues and hidden liabilities. The case became one of the biggest \ncorporate frauds in German history, involving €1.9 billion in missing cash.\n                ",
+  "key_findings": [
+    "Fictitious accounting entries totaling €1.9 billion",
+    "Failed AML due diligence on high-risk customers",
+    "Inadequate internal controls",
+    "Management fraud covering multiple years"
+  ],
+  "impact": "Massive fintech failure exposes need for stronger regulatory oversight",
+  "lesson": "Financial services require strict accounting controls and AML compliance",
+  "source": "BaFin Enforcement Action June 2020",
+  "url": "https://www.bafin.de/EN/Home/home_node.html"
+}
