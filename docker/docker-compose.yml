@@ -25,6 +25,7 @@ services:
       - "50051:50051"
     
     environment:
+      #CLUSTER_ENABLED: 'false'      
       QUERY_DEFAULTS_LIMIT: 25
       PERSISTENCE_DATA_PATH: '/var/lib/weaviate'
       

@@ -63,7 +63,7 @@ weaviate-down:
 
 weaviate-init:
 	@echo "Initializing Weaviate schemas..."
-	python -m src.data.weaviate
+	poetry run python -m src.data.weaviate
 
 weaviate-logs:
 	cd docker && docker-compose logs -f weaviate

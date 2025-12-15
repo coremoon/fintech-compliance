@@ -1,11 +1,12 @@
 **/*.pyc
 **/.DS_Store
-
+/docs
 /.vscode
 /.idea
 /.venv
 .coverage
 CHECKSUMS.sha1
+poetry.lock
 
 # Environment
 .env

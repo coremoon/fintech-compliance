@@ -19,7 +19,7 @@ ANTHROPIC_MODEL = os.getenv("ANTHROPIC_MODEL", "claude-sonnet-4-5-20250929")
 
 # Weaviate
 WEAVIATE_URL = os.getenv("WEAVIATE_URL", "http://localhost:8080")
-WEAVIATE_API_KEY = os.getenv("WEAVIATE_API_KEY", "2022weaviate")
+WEAVIATE_API_KEY = os.getenv("WEAVIATE_API_KEY", "weaviate")
 
 # Data paths
 DATA_PATH = Path(os.getenv("DATA_PATH", PROJECT_ROOT / "data"))
