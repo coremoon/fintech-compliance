@@ -53,8 +53,9 @@ clean:
 weaviate-up:
 	@echo "Starting Weaviate..."
 	cd docker && docker-compose up -d
-	@sleep 3
-	@curl -s http://localhost:8080/v1/meta > /dev/null && echo "✅ Weaviate ready at http://localhost:8080" || echo "⚠️ Weaviate starting..."
+	@echo "Waiting 15 seconds for Weaviate to be fully ready..."
+	@sleep 15
+	@curl -s http://localhost:8080/v1/meta > /dev/null && echo "✅ Weaviate ready!" || echo "⚠️ Weaviate still starting..."
 
 weaviate-down:
 	@echo "Stopping Weaviate..."

@@ -21,7 +21,7 @@ try:
     WEAVIATE_AVAILABLE = True
 except ImportError:
     WEAVIATE_AVAILABLE = False
-    logging.warning("⚠️  Weaviate not available - some features disabled")
+    logger.warning("⚠️  Weaviate not available - some features disabled")
 
 router = APIRouter(prefix="/health", tags=["Health"])
 
@@ -37,14 +37,22 @@ api_start_time = time.time()
     description="Check API health status",
 )
 async def health_check():
-    """Health check endpoint."""
+    """
+    Health check endpoint.
+    
+    Returns:
+        HealthCheckResponse: Status of API and dependencies
+    """
     uptime_seconds = time.time() - api_start_time
     
     return HealthCheckResponse(
         status="healthy",
-        timestamp=datetime.now(),
+        services={
+            "weaviate": "connected" if WEAVIATE_AVAILABLE else "disconnected",
+            "claude_api": "available",
+            "api": "running"
+        },
+        timestamp=datetime.now().isoformat(),
         uptime_seconds=uptime_seconds,
-        version="0.1.0",
-        weaviate_connected=WEAVIATE_AVAILABLE,
-        message="API is running"
+        version="0.1.0"
     )

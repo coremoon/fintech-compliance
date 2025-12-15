@@ -20,7 +20,7 @@ class Weaviate:
         """Initialize Weaviate client v1.28.0 with API Key
         
         Args:
-            url: Weaviate URL (e.g., http://localhost:8090)
+            url: Weaviate URL (e.g., http://localhost:8098)
             api_key: API key for authentication
             wait_for_startup: Wait for Weaviate to be ready (up to 30 seconds)
         """
@@ -33,7 +33,7 @@ class Weaviate:
         else:
             url_clean = url
         
-        host, port = url_clean.split(":") if ":" in url_clean else (url_clean, 8090)
+        host, port = url_clean.split(":") if ":" in url_clean else (url_clean, 8098)
         port = int(port)
         
         # Setup auth

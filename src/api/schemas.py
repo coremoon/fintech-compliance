@@ -5,7 +5,7 @@ Defines all input and output schemas for REST endpoints.
 """
 
 from typing import List, Optional, Dict, Any
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, field_validator
 from enum import Enum
 
 
@@ -15,12 +15,12 @@ from enum import Enum
 
 class BusinessModelEnum(str, Enum):
     """Crypto business model types."""
-    CASP = "CASP"  # Crypto-Asset Service Provider
-    DEX = "DEX"  # Decentralized Exchange
-    STAKING = "Staking Service"
-    LENDING = "Lending Service"
-    WALLET = "Wallet"
-    OTHER = "Other"
+    CASP = "CASP"
+    DEX = "DEX"
+    STAKING = "STAKING"
+    LENDING = "LENDING"
+    WALLET = "WALLET"
+    OTHER = "OTHER"
 
 
 class LanguageEnum(str, Enum):
@@ -74,11 +74,11 @@ class ProjectAnalysisRequest(BaseModel):
         description="Specific regulations to focus on (e.g., GDPR, MICA)"
     )
     
-    class Config:
+    class ConfigDict:
         example = {
             "project_name": "MyBitcoinStakingApp",
             "description": "Bitcoin staking service allowing users to earn yield...",
-            "business_model": "Staking Service",
+            "business_model": "STAKING",
             "target_jurisdiction": "EU",
             "specific_regulations": ["MICA", "GDPR", "MiFID2"]
         }
@@ -110,7 +110,7 @@ class ContractAnalysisRequest(BaseModel):
         description="Witness data (JSON format for Simplicity-HL)"
     )
     
-    class Config:
+    class ConfigDict:
         example = {
             "contract_name": "MultiSigWallet",
             "source_code": "fn main() { ... }",
@@ -141,7 +141,7 @@ class RegulationSearchRequest(BaseModel):
         description="Maximum results to return"
     )
     
-    class Config:
+    class ConfigDict:
         example = {
             "query": "custody requirements",
             "regulations": ["MICA", "GDPR"],
@@ -195,7 +195,7 @@ class ProjectAnalysisResponse(BaseModel):
     tokens_used: int
     cost_usd: float
     
-    class Config:
+    class ConfigDict:
         example = {
             "status": "success",
             "project_name": "MyBitcoinStakingApp",
@@ -323,7 +323,7 @@ class ErrorResponse(BaseModel):
 # HELPER FUNCTIONS
 # ============================================================================
 
-@validator("query")
+@field_validator("query")
 def validate_query(cls, v):
     """Validate search query."""
     if len(v.strip()) < 3:
@@ -331,7 +331,7 @@ def validate_query(cls, v):
     return v.strip()
 
 
-@validator("source_code")
+@field_validator("source_code")
 def validate_code(cls, v):
     """Validate smart contract code."""
     if len(v.strip()) < 10:

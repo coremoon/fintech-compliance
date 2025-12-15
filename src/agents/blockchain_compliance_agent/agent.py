@@ -205,6 +205,15 @@ Relevant regulations on this topic:
             logger.error(f"❌ Error: {e}")
             return f"Error: {e}"
     
+    def analyze(self, project_description: str, project_name: str = "Unnamed Project"):
+        """
+        Test-compatible wrapper for analyze_project
+        """
+        return self.analyze_project(
+            project_description=project_description,
+            project_name=project_name
+        )
+
     def generate_report(self, analysis_result: Dict[str, Any]) -> str:
         """
         Generate compliance report from analysis
