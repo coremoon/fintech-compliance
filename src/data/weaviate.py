@@ -1,7 +1,7 @@
 """
-Weaviate Integration - Simple (v4 API)
+Weaviate Integration - v1.28.0 with v4 API
 
-Single file, local Mac development.
+Local development with API Key authentication and BM25 full-text search.
 """
 
 import weaviate
@@ -14,13 +14,13 @@ from src.utils.logger import logger
 
 
 class Weaviate:
-    """Connect to Weaviate (v4) with API Key auth"""
+    """Connect to Weaviate v1.28.0 with API Key authentication and BM25 search"""
     
     def __init__(self, url: str = WEAVIATE_URL, api_key: str = WEAVIATE_API_KEY, wait_for_startup: bool = True):
-        """Initialize Weaviate client v4 with API Key
+        """Initialize Weaviate client v1.28.0 with API Key
         
         Args:
-            url: Weaviate URL (e.g., http://localhost:8098)
+            url: Weaviate URL (e.g., http://localhost:8090)
             api_key: API key for authentication
             wait_for_startup: Wait for Weaviate to be ready (up to 30 seconds)
         """
@@ -33,7 +33,7 @@ class Weaviate:
         else:
             url_clean = url
         
-        host, port = url_clean.split(":") if ":" in url_clean else (url_clean, 8098)
+        host, port = url_clean.split(":") if ":" in url_clean else (url_clean, 8090)
         port = int(port)
         
         # Setup auth
@@ -46,8 +46,7 @@ class Weaviate:
                 self.client = weaviate.connect_to_local(
                     host=host,
                     port=port,
-                    auth_credentials=auth,
-                    skip_init_checks=True
+                    auth_credentials=auth
                 )
                 logger.info(f"✅ Connected to Weaviate at {host}:{port} with API Key auth")
                 return
@@ -57,7 +56,7 @@ class Weaviate:
                     raise ConnectionError(
                         f"Weaviate not running at {host}:{port}\n\n"
                         f"Solution: Make sure Weaviate is running first!\n"
-                        f"  Run: make weaviate-up\n"
+                        f"  Run: docker-compose up -d\n"
                         f"  Then: make weaviate-init\n\n"
                         f"Error: {e}"
                     )
@@ -161,14 +160,16 @@ class Weaviate:
             raise
     
     def search_cases(self, query: str) -> List[Dict]:
-        """Search enforcement cases"""
+        """Search enforcement cases by violation or company using BM25"""
         
         try:
             cases = self.client.collections.get("Case")
             
-            results = cases.query.fetch_objects(
+            # Use BM25 for full-text search
+            results = cases.query.bm25(
+                query=query,
                 limit=5,
-                include_vector=False
+                return_properties=["company", "violation", "fine", "articles", "year", "lessons"]
             )
             
             return [
@@ -187,14 +188,16 @@ class Weaviate:
             return []
     
     def search_regulations(self, query: str) -> List[Dict]:
-        """Search regulations"""
+        """Search regulations by title, article, or text using BM25"""
         
         try:
             regs = self.client.collections.get("Regulation")
             
-            results = regs.query.fetch_objects(
+            # Use BM25 for full-text search
+            results = regs.query.bm25(
+                query=query,
                 limit=5,
-                include_vector=False
+                return_properties=["title", "article", "text", "regulation"]
             )
             
             return [
